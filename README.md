@@ -132,6 +132,17 @@ flowchart TD
     G --> C
 ```
 
+```mermaid
+flowchart TD
+    A[ESP32-S3 Camera] -->|Capture & Upload| B[Azure Node.js Backend]
+    B -->|Store| C[Azure Blob Storage]
+    B -->|Save metadata| D[Azure SQL Database]
+    B -->|Expose API| E[React Frontend]
+    E --> F[Physiotherapist views videos & metrics]
+```
+
+---
+
 ---
 
 ## 📝 Example Code (`setup()` & `loop()`)
@@ -190,11 +201,11 @@ Uploading video chunk...
 ```mermaid
 graph LR
   ESP32[ESP32-S3 Camera] -->|HTTPS Upload| Server[Azure Node.js Backend]
-  Server -->|API + SQL| Database[Azure SQL Database]
+  Server -->|Video Storage| Blob[Azure Blob Storage]
+  Server -->|Metadata| SQL[Azure SQL Database]
   Server -->|REST API| Frontend[React Web App]
   Frontend --> Physiotherapist
 ```
-
 ---
 
 ## 🛠️ Troubleshooting
